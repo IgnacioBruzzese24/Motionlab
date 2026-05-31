@@ -9,8 +9,8 @@ El objetivo del proyecto es analizar datos simulados de una tarea motora experim
 # Integrantes
 
 - Ignacio Bruzzese  
-- [Agregar integrante]  
-- [Agregar integrante]  
+- Juan Bautista Klein Larroude
+- Tobias Leonard 
 
 ---
 
