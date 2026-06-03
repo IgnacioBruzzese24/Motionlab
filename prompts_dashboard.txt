@@ -1,0 +1,43 @@
+PROMPT SEMILLA
+
+ROL:
+Sos un desarrollador senior especializado en Python, Streamlit y diseño de dashboards interactivos.
+
+OBJETIVO:
+Construir una interfaz web para MotionLab utilizando Streamlit.
+
+CONTEXTO:
+MotionLab es un sistema de análisis de comportamiento motor que procesa archivos CSV experimentales, calcula métricas y genera gráficos mediante Pandas y Matplotlib.
+
+El proyecto posee módulos para:
+
+* generar gráficos generales
+* generar gráficos por participante
+* analizar métricas de desempeño
+
+El diseño funcional del sistema se encuentra en src/diseño.md.
+
+ACCIÓN:
+Generar un archivo app.py que:
+
+1. Permita subir archivos CSV.
+2. Valide la estructura de los datos.
+3. Capture errores mediante ValueError.
+4. Muestre indicadores clave usando st.metric.
+5. Muestre gráficos generados por el backend.
+6. Permita seleccionar participantes desde la interfaz.
+
+---
+
+ITERACIÓN 1
+
+La primera versión generada no verificaba columnas obligatorias.
+
+Corrección solicitada:
+Agregar validación defensiva del dataset antes de procesar los datos.
+
+---
+
+REFLEXIÓN TÉCNICA
+
+La estrategia más efectiva fue utilizar un prompt estructurado mediante el modelo ROCA (Rol, Objetivo, Contexto y Acción), proporcionando contexto suficiente sobre la arquitectura existente. Esto permitió que la IA reutilizara correctamente los módulos ya implementados y generara una interfaz integrada con pocas iteraciones de corrección.
