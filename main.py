@@ -6,20 +6,25 @@ Created on Sun May 31 19:54:39 2026
 """
 
 import os
+import pandas as pd
 import matplotlib.pyplot as plt
-
-from procesamiento_datos import cargar_datos
-from metricas import calcular_hit_totales, calcular_tiempo_primer_hit, hits_por_condicion
 
 ruta = "MotionLab_mock_data.csv"
 
-df = cargar_datos(ruta)
+# Cargar datos asignando nombres de columnas manualmente
+# Según la estructura: id_participante, tiempo, x, y, hit, condicion
+df = pd.read_csv(
+    ruta, 
+    names=["id_participante", "tiempo", "x", "y", "hit", "condicion"]
+)
 
-
+print("Columnas del archivo:", df.columns.tolist())
+print("\nPrimeras filas:")
+print(df.head())
 
 id_usuario = int(
     input(
-        "Ingrese participante: "
+        "\nIngrese participante: "
     )
 )
 
@@ -29,23 +34,22 @@ participante = df[
 ]
 
 if participante.empty:
-
     raise ValueError(
         "Participante inexistente"
     )
 
+# Calcular hits totales
+hits = participante["hit"].sum()
 
-
-hits = calcular_hits_totales(
-    participante
-)
-
-primer_hit = calcular_tiempo_primer_hit(
-    participante
-)
+# Calcular tiempo del primer hit
+primeros_hits = participante[participante["hit"] == True]
+if not primeros_hits.empty:
+    primer_hit = primeros_hits["tiempo"].iloc[0]
+else:
+    primer_hit = -1
 
 print(
-    "Hits:",
+    "\nHits:",
     hits
 )
 
@@ -54,21 +58,15 @@ print(
     primer_hit
 )
 
-
-
 if not os.path.exists(
     "graficos"
 ):
-
     os.mkdir(
         "graficos"
     )
 
-
-
-agrupado = df.groupby(
-    "condicion"
-)["hit"].sum()
+# Hits por condición
+agrupado = df.groupby("condicion")["hit"].sum()
 
 plt.figure(
     figsize=(8,5)
@@ -94,8 +92,6 @@ plt.savefig(
 
 plt.close()
 
-
-
 plt.figure(
     figsize=(10,5)
 )
@@ -117,3 +113,5 @@ plt.savefig(
 )
 
 plt.close()
+
+print("\n✅ Gráficos guardados en la carpeta 'graficos/'")
