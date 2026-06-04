@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 Created on Sun May 31 19:54:39 2026
 
@@ -11,8 +11,7 @@ import matplotlib.pyplot as plt
 
 ruta = "MotionLab_mock_data.csv"
 
-# Cargar datos asignando nombres de columnas manualmente
-# Según la estructura: id_participante, tiempo, x, y, hit, condicion
+
 df = pd.read_csv(
     ruta, 
     names=["id_participante", "tiempo", "x", "y", "hit", "condicion"]
@@ -38,10 +37,10 @@ if participante.empty:
         "Participante inexistente"
     )
 
-# Calcular hits totales
+
 hits = participante["hit"].sum()
 
-# Calcular tiempo del primer hit
+
 primeros_hits = participante[participante["hit"] == True]
 if not primeros_hits.empty:
     primer_hit = primeros_hits["tiempo"].iloc[0]
@@ -65,7 +64,7 @@ if not os.path.exists(
         "graficos"
     )
 
-# Hits por condición
+
 agrupado = df.groupby("condicion")["hit"].sum()
 
 plt.figure(
